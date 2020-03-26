@@ -19,9 +19,9 @@ class App extends Component {
   }
 
   componentDidMount() { // get data from  => here
-    fetch('http://jsonplaceholder.typicode.com/users') //httmps error
+    fetch('https://raw.githubusercontent.com/franciscomelov/catalogoChips/master/src/chipsList.json') //httmps error
       .then(response => response.json())
-      .then(users => this.setState({ robots: users }))
+      .then(chipsList => this.setState({ robots: chipsList }))
   }
 
 
@@ -35,8 +35,8 @@ class App extends Component {
 
     const filteredRobot = this.state.robots.filter(robot => {
       return (
-        robot.name.toLowerCase().includes(searchfield.toLowerCase())
-        , robot.username.toLowerCase().includes(searchfield.toLowerCase())
+        robot.codigo.toString().toLowerCase().includes(searchfield.toString().toLowerCase()) ||
+        robot.carro.toString().toLowerCase().includes(searchfield.toString().toLowerCase())
       )
     })
     return !robots.length ?
@@ -50,6 +50,8 @@ class App extends Component {
             <ErrorBoundry>
               <CardList robots={filteredRobot} />
             </ErrorBoundry>
+            {console.log(typeof(searchfield),searchfield)}
+            {console.log(filteredRobot)}
 
           </Scroll>
 
